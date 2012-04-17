@@ -20,7 +20,14 @@
 __author__ = 'jasonstredwick@google.com (Jason Stredwick)'
 
 
-import argparse
+try:
+  import argparse
+except ImportError:
+  print ('[FAILED]  Missing argparse.py library.  Should come standard with '
+         '2.7 and 3.2+; Please download and add to python library path.')
+  print '    http://argparse.googlecode.com/svn/trunk/argparse.py'
+  print 'Build failed ... exiting.'
+  exit()
 
 
 CLEAN = 'clean'
