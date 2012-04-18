@@ -25,6 +25,7 @@ import sys
 import utils
 
 import deps as DEPS
+import tools as TOOLS
 
 
 COMMAND = 'command'
@@ -64,8 +65,8 @@ def CreateClosureCompilerCommand(deps, flags, controls, deps_location=''):
                   '--compiler_jar=%s' % compiler]
   return {
     COMMAND: command_base + controls + flags,
-    INPUTS: '--input=%(input)s',
-    OUTPUTS: '--output_file=%(output)s'
+    INPUTS: '--input=%s',
+    OUTPUTS: '--output_file=%s'
   }
 
 
@@ -113,10 +114,11 @@ def CreateSoyCompilerCommand(deps, flags, deps_location=''):
   compiler = os.path.join(deps_location,
                           deps[DEPS.CLOSURE_SOY_COMPILER][DEPS.ROOT])
 
+  java = TOOLS.GetExecutable(TOOLS.JAVA)
   return {
-    COMMAND: ['java -jar %s' % compiler] + flags,
-    INPUTS: '%(input)s',
-    OUTPUTS: '--outputPathFormat %(output)s'
+    COMMAND: ['java', '-jar', compiler] + flags + ['--outputPathFormat'],
+    INPUTS: '%s',
+    OUTPUTS: '%s'
   }
 
 
@@ -145,9 +147,9 @@ def CompileScript(src, dst, command, on_complete=None, force_compile=False):
   if os.path.exists(dst):
     os.remove(dst)
 
-  inputs = command[INPUTS] % {'input': src}
-  outputs = command[OUTPUTS] % {'output': dst}
-  full_command = command[COMMAND] + [outputs, inputs] # Specific order for SOY
+  inputs = command[INPUTS] % src
+  outputs = command[OUTPUTS] % dst
+  full_command = command[COMMAND] + [outputs, inputs] # Specific order
   return utils.ExecuteCommand(full_command, on_complete=on_complete,
                               no_wait=True)
 
