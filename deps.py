@@ -66,13 +66,13 @@ def CreateDeps():
     ACE: {
       ROOT: os.path.join(root, 'ace'),
       URL: 'git://github.com/ajaxorg/ace.git',
-      COMMAND: git + ' clone %s %s'
+      COMMAND: [git, 'clone']
     },
 
     ATOMS: {
       ROOT: os.path.join(root, 'selenium-atoms-lib'),
       URL: 'http://selenium.googlecode.com/svn/trunk/javascript/atoms',
-      COMMAND: svn + ' checkout %s %s'
+      COMMAND: [svn, 'checkout']
     },
 
     CLOSURE_COMPILER: {
@@ -85,7 +85,7 @@ def CreateDeps():
     CLOSURE_LIB: {
       ROOT: os.path.join(root, 'closure', 'closure-library'),
       URL: 'http://closure-library.googlecode.com/svn/trunk/',
-      COMMAND: svn + ' checkout %s %s'
+      COMMAND: [svn, 'checkout']
     },
 
     CLOSURE_SOY_COMPILER: {
@@ -99,19 +99,19 @@ def CreateDeps():
     GDATA: {
       ROOT: os.path.join(root, 'gdata-python-client'),
       URL: 'http://code.google.com/p/gdata-python-client/',
-      COMMAND: hg + ' clone %s %s'
+      COMMAND: [hg, 'clone']
     },
 
     URLNORM: {
       ROOT: os.path.join(root, 'urlnorm'),
       URL: 'git://gist.github.com/246089.git',
-      COMMAND: git + ' clone %s %s'
+      COMMAND: [git, 'clone']
     },
 
     MRTASKMAN: {
       ROOT: os.path.join(root, 'mrtaskman'),
       URL: 'http://code.google.com/p/mrtaskman',
-      COMMAND: git + ' clone %s %s'
+      COMMAND: [git, 'clone']
     }
   }
 
@@ -177,7 +177,7 @@ def _Download(command, url, location):
   This function does not handle corrupt downloads.
   """
   try:
-    utils.ExecuteCommand(command % (url, location))
+    utils.ExecuteCommand(command + [url, location])
     if not os.path.exists(location):
       return False
     return True

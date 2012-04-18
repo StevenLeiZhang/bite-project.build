@@ -56,7 +56,7 @@ class Bundle(object):
     self.js_targets = self.CreateJsTargets(src_root, dst_root) # Dict
     self.soy_targets = self.CreateSoyTargets(src_root, dst_root) # Dict
     self.copy_targets = self.CreateCopyTargets(deps, deps_root, src_root,
-                                              dst_root) # Dict
+                                               dst_root) # Dict
     # Array
     self.compiler_controls = self.CreateClosureCompilerControls(deps,
                                                                 src_root,

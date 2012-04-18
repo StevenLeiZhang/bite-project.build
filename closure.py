@@ -27,6 +27,11 @@ import utils
 import deps as DEPS
 
 
+COMMAND = 'command'
+INPUTS = 'inputs'
+OUTPUTS = 'outputs'
+
+
 def CreateCssFlags():
   return [
     '--add_copyright',
@@ -56,10 +61,12 @@ def CreateClosureCompilerCommand(deps, flags, controls, deps_location=''):
   command_base = [sys.executable,
                   builder,
                   '--output_mode=compiled',
-                  '--compiler_jar=%s' % compiler,
-                  '--input=%(input)s',
-                  '--output_file=%(output)s']
-  return ' '.join(command_base + controls + flags)
+                  '--compiler_jar=%s' % compiler]
+  return {
+    COMMAND: command_base + controls + flags,
+    INPUTS: '--input=%(input)s',
+    OUTPUTS: '--output_file=%(output)s'
+  }
 
 
 def CreateClosureCompilerFlags(deps, debug=True, deps_location=''):
@@ -106,9 +113,11 @@ def CreateSoyCompilerCommand(deps, flags, deps_location=''):
   compiler = os.path.join(deps_location,
                           deps[DEPS.CLOSURE_SOY_COMPILER][DEPS.ROOT])
 
-  return ' '.join(['java -jar %s' % compiler] + flags +
-                  ['--outputPathFormat %(output)s',
-                   '%(input)s'])
+  return {
+    COMMAND: ['java -jar %s' % compiler] + flags,
+    INPUTS: '%(input)s',
+    OUTPUTS: '--outputPathFormat %(output)s'
+  }
 
 
 def CreateSoyCompilerFlags():
@@ -136,9 +145,10 @@ def CompileScript(src, dst, command, on_complete=None, force_compile=False):
   if os.path.exists(dst):
     os.remove(dst)
 
-  data = {'input': src, 'output': dst}
-  x = command % data
-  return utils.ExecuteCommand(command % data, on_complete=on_complete,
+  inputs = command[INPUTS] % src
+  outputs = command[OUTPUTS] % dst
+  full_command = command + [outputs, inputs] # Specific order for SOY
+  return utils.ExecuteCommand(full_command, on_complete=on_complete,
                               no_wait=True)
 
 

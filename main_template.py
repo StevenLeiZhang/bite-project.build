@@ -55,6 +55,8 @@ except ImportError:
 
     print 'Opensource BITE build is not downloaded.  Downloading now ...'
     url = 'https://code.google.com/p/bite-project.build'
+    # TODO (jason.stredwick): Figure out how to do cross-plat for git without
+    # utils.
     command = 'git clone %s %s' % (url, target)
 
     process = subprocess.Popen(command.split(' '),
