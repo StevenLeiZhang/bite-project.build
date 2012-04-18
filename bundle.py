@@ -125,7 +125,7 @@ class Bundle(object):
       if isTree:
         shutil.copytree(src, dst)
       else:
-        shutil.copyfile(src, dst)
+        shutil.copy2(src, dst)
 
     if verbose:
       s = utils.GetIndentString(2)
