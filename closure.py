@@ -145,8 +145,8 @@ def CompileScript(src, dst, command, on_complete=None, force_compile=False):
   if os.path.exists(dst):
     os.remove(dst)
 
-  inputs = command[INPUTS] % src
-  outputs = command[OUTPUTS] % dst
+  inputs = command[INPUTS] % {'input': src}
+  outputs = command[OUTPUTS] % {'output': dst}
   full_command = command + [outputs, inputs] # Specific order for SOY
   return utils.ExecuteCommand(full_command, on_complete=on_complete,
                               no_wait=True)
