@@ -36,13 +36,13 @@ def ExecuteCommand(command, on_complete=None, no_wait=False):
   """Execute the given command and return the output.
 
   Args:
-    command: A string representing the command to execute.
+    command: A list of strings representing the command to execute.
     no_wait: Whether not to wait for finished.
 
   Returns:
     The process or None if no_wait is True.
   """
-  process = subprocess.Popen(command.split(' '),
+  process = subprocess.Popen(command,
                              stderr=subprocess.STDOUT,
                              stdout=subprocess.PIPE)
   if no_wait:
