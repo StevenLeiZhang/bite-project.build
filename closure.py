@@ -147,7 +147,7 @@ def CompileScript(src, dst, command, on_complete=None, force_compile=False):
 
   inputs = command[INPUTS] % {'input': src}
   outputs = command[OUTPUTS] % {'output': dst}
-  full_command = command + [outputs, inputs] # Specific order for SOY
+  full_command = command[COMMAND] + [outputs, inputs] # Specific order for SOY
   return utils.ExecuteCommand(full_command, on_complete=on_complete,
                               no_wait=True)
 
