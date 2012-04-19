@@ -207,6 +207,8 @@ class Extension(bundle.Bundle):
       '--root=%s' % os.path.join(deps_location, deps[DEPS.ATOMS][DEPS.ROOT]),
 
       '--compiler_flags=--externs=%s' % os.path.join(src_location,
+          'common', 'extension', 'externs', 'closure.js'),
+      '--compiler_flags=--externs=%s' % os.path.join(src_location,
           'common', 'extension', 'externs', 'chrome_extensions.js'),
       '--compiler_flags=--externs=%s' % os.path.join(src_location,
           'common', 'extension', 'externs', 'rpf_externs.js'),
