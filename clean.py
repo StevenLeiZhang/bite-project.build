@@ -25,6 +25,7 @@ import os
 import shutil
 
 import paths
+import utils
 
 
 CLEAN_PATHS = {
@@ -41,4 +42,9 @@ EXPUNGE_PATHS = {
 def RemovePaths(path_array):
   for path in path_array:
     if (os.path.exists(path)):
-      shutil.rmtree(path)
+      # TODO (jason.stredwick): Temporary fix for Windows under the new build.
+      #shutil.rmtree(path)
+      if utils.IsOsWindows():
+        os.system('rmdir /S /Q \"{}\"'.format(path))
+      else:
+        shutil.rmtree(path)

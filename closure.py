@@ -22,10 +22,10 @@ __author__ = 'jasonstredwick@google.com (Jason Stredwick)'
 
 import os
 import sys
-import utils
 
 import deps as DEPS
 import tools as TOOLS
+import utils
 
 
 COMMAND = 'command'
@@ -150,8 +150,12 @@ def CompileScript(src, dst, command, on_complete=None, force_compile=False):
   inputs = command[INPUTS] % src
   outputs = command[OUTPUTS] % dst
   full_command = command[COMMAND] + [outputs, inputs] # Specific order
+  # TODO (jason.stredwick): Temporary fix for Windows under new build.
+  no_wait = True
+  if utils.IsOsWindows():
+    no_wait = False
   return utils.ExecuteCommand(full_command, on_complete=on_complete,
-                              no_wait=True)
+                              no_wait=no_wait)
 
 
 class OnComplete:

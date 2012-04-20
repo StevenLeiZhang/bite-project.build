@@ -140,3 +140,7 @@ def Merge(start, dst):
 
       # Copy the file to the new location.
       shutil.copy(root_src, root_dst)
+
+
+def IsOsWindows():
+  return os.name == 'nt'
