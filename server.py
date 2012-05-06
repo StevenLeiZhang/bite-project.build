@@ -115,6 +115,13 @@ class Server(bundle.Bundle):
         TREE: True
       },
 
+      'atoms_src': {
+        SRC: os.path.join(deps_location, deps[DEPS.GDATA][ROOT], 'src',
+                          'atom'),
+        DST: os.path.join(server_dst, 'atom'),
+        TREE: True
+      },
+
       'gdata_src': {
         SRC: os.path.join(deps_location, deps[DEPS.GDATA][ROOT], 'src',
                           'gdata'),
