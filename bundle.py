@@ -119,7 +119,7 @@ class Bundle(object):
       isTree = target[TREE]
 
       (path, _) = os.path.split(dst)
-      if not os.path.exists(path):
+      if path and not os.path.exists(path):
         os.makedirs(path)
 
       if isTree:
