@@ -143,8 +143,7 @@ class Extension(bundle.Bundle):
       },
 
       'ace': {
-        SRC: os.path.join(deps_location, deps[DEPS.ACE][DEPS.ROOT], 'build',
-                          'src'),
+        SRC: os.path.join(deps_location, deps[DEPS.ACE][DEPS.ROOT], 'lib'),
         DST: os.path.join(dst_root, 'ace'),
         TREE: True
       }
