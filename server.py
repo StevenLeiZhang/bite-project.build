@@ -166,5 +166,6 @@ class Server(bundle.Bundle):
                                  deps[DEPS.CLOSURE_LIB][DEPS.ROOT]),
       '--root=%s' % os.path.join(deps_location, DEPS.GetSoyLibraryPath(deps)),
       '--root=%s' % os.path.join(deps_location, PATHS.GENFILES_ROOT, 'server'),
-      '--root=%s' % os.path.join(deps_location, deps[DEPS.ATOMS][DEPS.ROOT])
+      '--root=%s' % os.path.join(deps_location, deps[DEPS.ATOMS][DEPS.ROOT]),
+      '--root=%s' % os.path.join(deps_location, deps[DEPS.WGXPATH][DEPS.ROOT])
     ]
