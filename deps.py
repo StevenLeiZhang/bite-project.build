@@ -39,6 +39,7 @@ CLOSURE_SOY_COMPILER = 'closure-soy-compiler'
 GDATA = 'gdata'
 MRTASKMAN = 'mrtaskman'
 URLNORM = 'urlnorm'
+WGXPATH = 'wgxpath'
 
 COMMAND = 'command'
 FUNCTION = 'function'
@@ -112,6 +113,12 @@ def CreateDeps():
       ROOT: os.path.join(root, 'mrtaskman'),
       URL: 'http://code.google.com/p/mrtaskman',
       COMMAND: [git, 'clone']
+    },
+
+    WGXPATH: {
+      ROOT: os.path.join(root, 'wgxpath'),
+      URL: 'http://selenium.googlecode.com/svn/trunk/third_party/js/wgxpath',
+      COMMAND: [svn, 'checkout']
     }
   }
 
