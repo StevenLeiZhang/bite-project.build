@@ -167,5 +167,7 @@ class Server(bundle.Bundle):
       '--root=%s' % os.path.join(deps_location, DEPS.GetSoyLibraryPath(deps)),
       '--root=%s' % os.path.join(deps_location, PATHS.GENFILES_ROOT, 'server'),
       '--root=%s' % os.path.join(deps_location, deps[DEPS.ATOMS][DEPS.ROOT]),
-      '--root=%s' % os.path.join(deps_location, deps[DEPS.WGXPATH][DEPS.ROOT])
+      '--root=%s' % os.path.join(deps_location, deps[DEPS.WGXPATH][DEPS.ROOT]),
+      '--compiler_flags=--externs=%s' % os.path.join(src_location,
+          'common', 'extension', 'externs', 'rpf_externs.js')
     ]
